@@ -35,10 +35,24 @@ The infrastructure is split into three distinct layers across two Availability Z
     terraform init
     ```
 3.  **Configure Variables**: Create a `terraform.tfvars` file and add your specific configurations (e.g., region, instance types).
-4.  **Deploy**:
-    ```bash
+4.  ## ⚙️ Configuration Reference
+
+The following values are used to define the infrastructure boundaries in `terraform.tfvars`:
+
+| Parameter | Value | Description |
+| :--- | :--- | :--- |
+| **Region** | `us-east-1` | AWS Primary Region |
+| **VPC CIDR** | `10.0.0.0/16` | Main Network Address Space |
+| **Public Subnets** | `10.0.1.0/24`, `10.0.2.0/24` | External-facing (ALB, NAT GW) |
+| **Private Subnets** | `10.0.10.0/24`, `10.0.11.0/24` | Application Layer (EC2) |
+| **Database Subnets** | `10.0.20.0/24`, `10.0.21.0/24` | Data Layer (RDS, Redis) |
+| **Alert Email** | `admin@example.com` | CloudWatch Alarms Destination |
+
+
+5.  **Deploy**:
+    
     terraform apply -auto-approve
-    ```
+    
 
 ## 📝 Frontend Integration (`index.html`)
 The frontend is designed to be completely decoupled. Once the infrastructure is deployed, the `index.html` file is updated with the **ALB DNS Name** to communicate with the backend API.
@@ -46,3 +60,4 @@ The frontend is designed to be completely decoupled. Once the infrastructure is 
 ```javascript
 // Example of the Fetch call in index.html
 const API_URL = "http://YOUR_ALB_DNS_NAME/api/products";
+

@@ -1,0 +1,18 @@
+# Local terraform state (CONTAINS SECRETS)
+*.tfstate
+*.tfstate.*
+.terraform/
+.terraform.*
+
+# Sensitive Variable files
+*.tfvars.json
+*.tfvars
+secrets.tfvars
+
+# Private SSH Keys
+*.pem
+*.pub
+
+# Logs and OS files
+*.log
+.DS_Store
